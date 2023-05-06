@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const PORT = 3001;
 import app from "./src/app";
 

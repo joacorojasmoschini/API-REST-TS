@@ -7,4 +7,12 @@ const handleHttp = (res: Response, error: string, errorRaw? : any) => {
   res.status(500).json({ error });
 } 
 
-export { handleHttp };
+const handleSession = (res: Response, error?: any) => {
+  console.log(error);
+  res.status(401).json({
+    error,
+    message: "Invalid session"
+  });
+};
+
+export { handleHttp, handleSession };
