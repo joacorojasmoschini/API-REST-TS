@@ -4,7 +4,7 @@ import { UserModel } from "../models/user";
 import { generateToken } from "../utils/jwtHandle";
 import { encrypt, validate } from "../utils/passwordHandle";
 
-const registerUser = async ({userName, name, lastName, birthday, password, email, avatar }: User) => {
+const registerUser = async ({userName, name, birthday, password, email, avatar }: User) => {
   const checkEmail = await UserModel.findOne({ email });
   const checkUserName = await UserModel.findOne({ userName });
 
@@ -12,10 +12,9 @@ const registerUser = async ({userName, name, lastName, birthday, password, email
   if(checkUserName) return { message: "The User Name Alredy Exists" };
   
   const encryptPassword = await encrypt(password);
-  const newUser = UserModel.create({
+  const newUser = await UserModel.create({
     userName,
     name,
-    lastName,
     birthday,
     password: encryptPassword,
     email,
